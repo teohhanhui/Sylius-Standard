@@ -11,6 +11,10 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 	mkdir -p var/cache var/log public/media
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var public/media
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var public/media
+	if [ -e config/jwt/private.pem ]; then
+		setfacl -dR -m u:www-data:r config/jwt/private.pem
+		setfacl -R -m u:www-data:r config/jwt/private.pem
+	fi
 
 	if [ "$APP_ENV" != 'prod' ]; then
 		composer install --prefer-dist --no-progress --no-suggest --no-interaction

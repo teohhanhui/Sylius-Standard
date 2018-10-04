@@ -1,4 +1,4 @@
 api_platform:
     resource: .
     type: api_platform
-    prefix: /api-v2
+    prefix: /api_v2

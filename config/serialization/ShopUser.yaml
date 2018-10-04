@@ -1,0 +1,14 @@
+Sylius\Component\Core\Model\ShopUser:
+    attributes:
+        createdAt:
+            groups:
+                - sylius_shop_user_read_admin
+        enabled:
+            groups:
+                - sylius_shop_user_read_admin
+        id:
+            groups:
+                - sylius_shop_user_read
+        validatedAt:
+            groups:
+                - sylius_shop_user_read_admin

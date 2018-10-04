@@ -1,9 +1,9 @@
 parameters:
     sylius.security.admin_regex: "^/admin"
     sylius.security.api_regex: "^/api"
-    sylius.security.api_v2_regex: "^/api-v2"
+    sylius.security.api_v2_regex: "^/api_v2"
     sylius.security.shop_api_regex: "^/shop-api"
-    sylius.security.shop_regex: "^/(?!admin|api/.*|api$|api-v2|shop-api|media/.*)[^/]++"
+    sylius.security.shop_regex: "^/(?!admin|api/.*|api$|api_v2|shop-api|media/.*)[^/]++"
 
 security:
     providers:

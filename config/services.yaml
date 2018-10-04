@@ -27,3 +27,10 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\Serializer\ContextBuilder:
+        decorates: 'api_platform.serializer.context_builder.filter'
+        arguments:
+            $decorated: '@App\Serializer\ContextBuilder.inner'
+
+    Sylius\Component\Resource\Metadata\RegistryInterface: '@sylius.resource_registry'

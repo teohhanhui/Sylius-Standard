@@ -5,3 +5,7 @@ framework:
     templating: { engines: ["twig"] }
     session:
         handler_id: ~
+    serializer:
+        mapping:
+            paths:
+                - '%kernel.project_dir%/config/serialization'

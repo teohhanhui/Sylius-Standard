@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Serializer;
 
-use ApiPlatform\Core\Exception\ResourceClassNotFoundException;
-use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use Doctrine\Common\Inflector\Inflector;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
@@ -16,14 +14,12 @@ final class ContextBuilder implements SerializerContextBuilderInterface
 {
     private $decorated;
     private $metadataRegisry;
-    private $resourceMetadataFactory;
     private $authorizationChecker;
 
-    public function __construct(SerializerContextBuilderInterface $decorated, RegistryInterface $metadataRegisry, ResourceMetadataFactoryInterface $resourceMetadataFactory, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(SerializerContextBuilderInterface $decorated, RegistryInterface $metadataRegisry, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->decorated = $decorated;
         $this->metadataRegisry = $metadataRegisry;
-        $this->resourceMetadataFactory = $resourceMetadataFactory;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -36,18 +32,12 @@ final class ContextBuilder implements SerializerContextBuilderInterface
         $resourceClass = $context['resource_class'] ?? null;
 
         try {
-            $this->metadataRegisry->getByClass($resourceClass);
+            $syliusMetadata = $this->metadataRegisry->getByClass($resourceClass);
         } catch (\InvalidArgumentException $e) {
             return $context;
         }
 
-        try {
-            $resourceMetadata = $this->resourceMetadataFactory->create($resourceClass);
-        } catch (ResourceClassNotFoundException $e) {
-            return $context;
-        }
-
-        $baseGroup = sprintf('sylius_%s_%s', Inflector::tableize($resourceMetadata->getShortName()), $normalization ? 'read' : 'write');
+        $baseGroup = sprintf('%s_%s_%s', $syliusMetadata->getApplicationName(), $syliusMetadata->getName(), $normalization ? 'read' : 'write');
 
         $context['groups'][] = $baseGroup;
 

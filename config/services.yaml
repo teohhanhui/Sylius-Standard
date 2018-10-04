@@ -28,6 +28,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Security\User\UserProvider:
+        arguments:
+            $shopUserProvider: '@sylius.shop_user_provider.email_or_name_based'
+            $adminUserProvider: '@sylius.admin_user_provider.email_or_name_based'
+
     App\Serializer\ContextBuilder:
         decorates: 'api_platform.serializer.context_builder.filter'
         arguments:

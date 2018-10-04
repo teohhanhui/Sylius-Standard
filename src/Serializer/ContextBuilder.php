@@ -27,6 +27,9 @@ final class ContextBuilder implements SerializerContextBuilderInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
@@ -48,7 +51,7 @@ final class ContextBuilder implements SerializerContextBuilderInterface
 
         $context['groups'][] = $baseGroup;
 
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        if ($this->authorizationChecker->isGranted('ROLE_ADMINISTRATION_ACCESS')) {
             $context['groups'][] = $baseGroup.'_admin';
         }
 

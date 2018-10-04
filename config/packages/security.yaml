@@ -1,7 +1,9 @@
 parameters:
     sylius.security.admin_regex: "^/admin"
     sylius.security.api_regex: "^/api"
-    sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
+    sylius.security.api_v2_regex: "^/api-v2"
+    sylius.security.shop_api_regex: "^/shop-api"
+    sylius.security.shop_regex: "^/(?!admin|api/.*|api$|api-v2|shop-api|media/.*)[^/]++"
 
 security:
     providers:
@@ -50,6 +52,44 @@ security:
             stateless: true
             anonymous: true
 
+        api_v2_login:
+            pattern:  "%sylius.security.api_v2_regex%/login"
+            provider: sylius_shop_user_provider
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: sylius_api_v2_login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api_v2:
+            pattern: "%sylius.security.api_v2_regex%"
+            provider: sylius_shop_user_provider
+            stateless:  true
+            anonymous:  true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        shop_api_login:
+            pattern:  "%sylius.security.shop_api_regex%/login"
+            provider: sylius_shop_user_provider
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: sylius_shop_api_login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        shop_api:
+            pattern: "%sylius.security.shop_api_regex%"
+            provider: sylius_shop_user_provider
+            stateless:  true
+            anonymous:  true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context: shop
@@ -92,11 +132,14 @@ security:
 
         - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.api_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.shop_api_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        - { path: "%sylius.security.shop_api_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
         - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.api_v2_regex%", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }

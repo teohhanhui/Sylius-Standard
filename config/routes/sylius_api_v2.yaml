@@ -1,0 +1,3 @@
+sylius_api_v2_login_check:
+    methods: [POST]
+    path: /api-v2/login_check

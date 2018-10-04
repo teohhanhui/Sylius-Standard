@@ -2,6 +2,18 @@
     "akeneo/phpspec-skip-example-extension": {
         "version": "v3.0.0"
     },
+    "api-platform/api-pack": {
+        "version": "1.1.0"
+    },
+    "api-platform/core": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.1",
+            "ref": "18727d8f229306860b46955f438e1897421da689"
+        }
+    },
     "behat/behat": {
         "version": "v3.5.0"
     },
@@ -239,6 +251,30 @@
     "lakion/mink-debug-extension": {
         "version": "v1.2.3"
     },
+    "lcobucci/jwt": {
+        "version": "3.2.4"
+    },
+    "league/tactician": {
+        "version": "v1.0.3"
+    },
+    "league/tactician-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "222c3d39d38378bc6a9790a0b5baf841ba6679b9"
+        }
+    },
+    "league/tactician-container": {
+        "version": "2.0.0"
+    },
+    "league/tactician-doctrine": {
+        "version": "v1.1.1"
+    },
+    "league/tactician-logger": {
+        "version": "v0.10.0"
+    },
     "league/uri": {
         "version": "5.3.0"
     },
@@ -259,6 +295,15 @@
     },
     "league/uri-schemes": {
         "version": "1.2.0"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "509b1542f3180a1cfe248ade8b7bf5092c2d4127"
+        }
     },
     "liip/imagine-bundle": {
         "version": "1.8",
@@ -287,6 +332,9 @@
     "myclabs/deep-copy": {
         "version": "1.8.1"
     },
+    "namshi/jose": {
+        "version": "7.2.3"
+    },
     "nelmio/alice": {
         "version": "3.2",
         "recipe": {
@@ -294,6 +342,15 @@
             "branch": "master",
             "version": "3.2",
             "ref": "5ef2976310e8f9621c1a722a73bfbe115c1559a3"
+        }
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "1fee84e00c71edee81aa54b470260779a890c9c6"
         }
     },
     "nette/finder": {
@@ -539,6 +596,9 @@
     "sylius-labs/coding-standard": {
         "version": "v2.0.0"
     },
+    "sylius/shop-api-plugin": {
+        "version": "v1.0.0-beta.21"
+    },
     "symfony/asset": {
         "version": "v4.1.3"
     },
@@ -662,10 +722,16 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.9.0"
+    },
     "symfony/polyfill-php70": {
         "version": "v1.9.0"
     },
     "symfony/polyfill-php72": {
+        "version": "v1.9.0"
+    },
+    "symfony/polyfill-util": {
         "version": "v1.9.0"
     },
     "symfony/process": {
@@ -673,6 +739,9 @@
     },
     "symfony/property-access": {
         "version": "v4.1.3"
+    },
+    "symfony/property-info": {
+        "version": "v4.1.6"
     },
     "symfony/proxy-manager-bridge": {
         "version": "v4.1.3"
@@ -697,6 +766,9 @@
             "version": "3.3",
             "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
+    },
+    "symfony/serializer": {
+        "version": "v4.1.6"
     },
     "symfony/stopwatch": {
         "version": "v4.1.3"

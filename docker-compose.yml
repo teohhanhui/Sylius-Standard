@@ -12,6 +12,8 @@ services:
     image: quay.io/sylius/php:latest
     depends_on:
       - mysql
+    env_file:
+      - ./.env.dist
     environment:
       - APP_ENV=dev
       - APP_DEBUG=1
